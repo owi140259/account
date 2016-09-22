@@ -1,0 +1,68 @@
+{% extends "layout.php" %}
+
+{% block content %}
+    <h1>You have active friend requests</h1>
+    <div class="requests">
+        <div class="request">
+            <div class="pic" style="background: url(/account/web/images/mark.jpg)"></div>
+            <div class="name">Mark</div>
+            <form class="respond-form" name="respond-form" action="/account/web/respond" method="POST">
+                <input type="hidden" name="friend-id" value="1">
+                <input type="submit" name="accept" value="Accept">
+                <input type="submit" name="ignore" value="Ignore">
+            </form>
+        </div>
+        <div class="request">
+            <div class="pic" style="background: url(/account/web/images/bill.jpg)"></div>
+            <div class="name">Bill</div>
+            <form class="respond-form" name="respond-form" action="/account/web/respond" method="POST">
+                <input type="hidden" name="friend-id" value="2">
+                <input type="submit" name="accept" value="Accept">
+                <input type="submit" name="ignore" value="Ignore">
+            </form>
+        </div>
+    </div>
+    <h1>You have 2 friends</h1>
+    <div class="friends">
+        <div class="friend">
+            <div class="pic" style="background: url(/account/web/images/dennis.jpg)"></div>
+            <div class="name">Dennis</div>
+            <form class="view-form" name="view-form" action="/account/web/respond" method="POST">
+                <input type="hidden" name="friend-id" value="3">
+                <input type="submit" name="view" value="View Profile">
+            </form>
+        </div>
+        <div class="friend">
+            <div class="pic" style="background: url(/account/web/images/tim.png)"></div>
+            <div class="name">Tim</div>
+            <form class="view-form" name="view-form" action="/account/web/respond" method="POST">
+                <input type="hidden" name="friend-id" value="4">
+                <input type="submit" name="view" value="View Profile">
+            </form>
+        </div>
+    </div>
+    <hr>
+    <div class="search">
+        <input type="text" id="search-input">
+        <button id="search-button">Search</button>
+    </div>
+    <h4>Results</h4>
+    <div class="friends">
+        <div class="friend">
+            <div class="pic" style="background: url(/account/web/images/linus.jpg)"></div>
+            <div class="name">Linus</div>
+            <form class="send-form" name="send-form" action="/account/web/respond" method="POST">
+                <input type="hidden" name="friend-id" value="5">
+                <input type="submit" name="send" value="Send Request">
+            </form>
+        </div>
+        <div class="friend">
+            <div class="pic" style="background: url(/account/web/images/michael.jpg)"></div>
+            <div class="name">Michael</div>
+            <form class="send-form" name="send-form" action="/account/web/respond" method="POST">
+                <input type="hidden" name="friend-id" value="6">
+                <input type="submit" name="send" value="Send Request">
+            </form>
+        </div>
+    </div>
+{% endblock %}

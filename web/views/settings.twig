@@ -1,0 +1,29 @@
+{% extends "layout.php" %}
+
+{% block content %}
+    <h1>Basic Info</h1>
+    <div class="basic-info">
+        <form name="basic-info-form" action="/account/web/info/basic" method="POST" class="two-col">
+            <div class="form-row">
+                <label for="user-name">Name</label>
+                <input type="text" name="user-name">
+            </div>
+            <div class="form-row">
+                <label for="user-name">Email</label>
+                <input type="text" name="user-email">
+            </div>
+            <div class="form-row">
+                <input type="submit" name="apply" value="Apply">
+            </div>
+        </form>
+    </div>
+    <hr>
+    <h1>Avatar Info</h1>
+    <div class="avatar-info">
+        <form name="avatar-info-form" action="/account/web/info/avatar" method="POST" class="two-col">
+            <div class="form-row">
+                <input type="submit" name="apply" value="Apply">
+            </div>
+        </form>
+    </div>
+{% endblock %}
