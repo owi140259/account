@@ -12,6 +12,15 @@
         'twig.path' => __DIR__.'/views',
     ));
 
+    // Before and After
+    $app->before(function(Request $request) {
+        require_once 'seed.php';
+    });
+
+    $app->after(function(Request $request) {
+        $pdo = null;
+    });
+
     // Routes go here
     $app->get('/', function(Request $request) use ($app) {
         return "<h1>Hello World</h1>";
