@@ -10,7 +10,10 @@
         </div>
         <header class="well">
             <div class="loggedin">
-                <p>You are logged in as User</p>
+                <p>You are logged in as {{ app.session.get('name') }}</p>
+                <form name="logout-form" method="post" action="/account/web/logout">
+                    <input type="submit" value="Log out">
+                </form>
             </div>
             <nav>
                 <ul>
