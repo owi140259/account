@@ -20,8 +20,10 @@
     <hr>
     <h1>Avatar Info</h1>
     <div class="avatar-info">
-        <form name="avatar-info-form" action="/account/web/info/avatar" method="POST" class="two-col">
+        <form name="avatar-info-form" action="/account/web/info/avatar" method="POST"
+              enctype="multipart/form-data" class="two-col">
             <div class="form-row">
+                <input type="file" name="avatar-file">
                 <input type="submit" name="apply" value="Apply">
             </div>
         </form>

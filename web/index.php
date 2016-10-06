@@ -3,13 +3,15 @@
 
     require_once __DIR__.'/../vendor/autoload.php';
     require_once __DIR__.'/delegates/auth_delegate.php';
+    require_once __DIR__.'/delegates/user_delegate.php';
     
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\HttpFoundation\Session\Session;
 
     $app = new Silex\Application();
-    
+    $app['debug'] = true;
+
     // Service provider registrations go here
     $app->register(new Silex\Provider\SessionServiceProvider());
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
@@ -53,6 +55,7 @@
             
         } else {
             
+            // Login here
             $app['session']->set('id', $user['id']);
             $app['session']->set('name', $user['name']);
             $app['session']->set('email', $user['email']);
@@ -72,12 +75,41 @@
     });
 
     $app->get('/settings', function(Request $request) use ($app) {
-        return $app['twig']->render('settings.twig', array());
+        if (!$app['session']->has('id')) {
+            return $app->redirect('/account/web/login');
+        } else {
+            return $app['twig']->render('settings.twig', array());
+        }
     });
 
     $app->get('/friends', function(Request $request) use ($app) {
-        return $app['twig']->render('friends.twig', array());
+        if (!$app['session']->has('id')) {
+            return $app->redirect('/account/web/login');
+        } else {
+            return $app['twig']->render('friends.twig', array());
+        }
     });
+
+    $app->post('/info/basic', function(Request $request) use ($app) {
+        if (!$app['session']->has('id')) {
+            return $app->redirect('/account/web/login');
+        }
+        
+        $id = $app['session']->get('id');
+        $name = $request->get('name');
+        update_user_name($id, $name);
+        return $app->redirect('/account/web/settings');
+    }); 
+
+    $app->post('/info/avatar', function(Request $request) use ($app) {
+        if (!$app['session']->has('id')) {
+            return $app->redirect('/account/web/login');
+        }
+        
+        $avatarFile = $request->files->get('avatar-file');
+        $avatarFile->move(__DIR__.'/images', $avatarFile->getClientOriginalName());
+        return $app->redirect('/account/web/settings');
+    }); 
 
     // Run the app
     $app->run();
