@@ -7,6 +7,17 @@
     $dsn = "mysql:host=$host;charset=utf8";
     $username = "root";
     $password = "root";
+
+
+if (getenv('CLEARDB_DATABASE_URL')){
+    $host = getenv( 'DATABASE_HOST';
+    $dbname = getenv( 'DATABASE_DBNAME'; 
+    $username = getenv( "DATABASE_USERNAME";
+    $password = getenv( "DATABASE_PASSWORD";
+
+
+
+}
     
     try {
         $pdo = new PDO($dsn, $username, $password);
