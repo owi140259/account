@@ -4,6 +4,7 @@
     require_once __DIR__.'/../vendor/autoload.php';
     require_once __DIR__.'/delegates/auth_delegate.php';
     require_once __DIR__.'/delegates/user_delegate.php';
+    require_once __DIR__.'/delegates/friendship_delegate.php';
     
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
@@ -86,14 +87,22 @@
         if (!$app['session']->has('id')) {
             return $app->redirect('/account/web/login');
         } else {
-            return $app['twig']->render('friends.twig', array());
-        }
+
+                $id = $app['session']->get('id');
+                $friend_requests = get_friend_request_users($app['session']->get('id'));
+                $friends = get_friend_users($app['session']->get('id'));
+                $model = array("friend_requests" => $friend_requests, "friends" => $friends);              
+                
+                
+                return $app['twig']->render('friends.twig', $model);
+                }
     });
 
     $app->post('/info/basic', function(Request $request) use ($app) {
         if (!$app['session']->has('id')) {
             return $app->redirect('/account/web/login');
         }
+        
         
         $id = $app['session']->get('id');
         $name = $request->get('name');
@@ -111,6 +120,21 @@
         return $app->redirect('/account/web/settings');
     }); 
 
+    //Run app
+            $app->post('/search', function(Request $request) use ($app) {
+            if (!$app['session']->has('id')) {
+                return $app->redirect('/account/web/login');
+                }
+
+
+
+                $search_input = $request->get('searchTerm');
+                $results = search_for_users($search_input);
+                $model = array("results" => $results);
+
+                return $app['twig']->render('search_results.twig', $model);
+            });
+    
     // Run the app
     $app->run();
 ?>
