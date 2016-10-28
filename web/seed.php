@@ -9,11 +9,11 @@
     $password = "root";
 
 
-if (getenv('CLEARDB_DATABASE_URL')){
-    $host = getenv( 'DATABASE_HOST';
-    $dbname = getenv( 'DATABASE_DBNAME'; 
-    $username = getenv( "DATABASE_USERNAME";
-    $password = getenv( "DATABASE_PASSWORD";
+if (getenv('CLEARDB_DATABASE_URL')) {
+    $host = getenv( 'DATABASE_HOST');
+    $dbname = getenv( 'DATABASE_DBNAME'); 
+    $username = getenv( "DATABASE_USERNAME");
+    $password = getenv( "DATABASE_PASSWORD");
 
 
 
